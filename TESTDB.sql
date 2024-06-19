@@ -653,142 +653,142 @@
 -- (145909,	'Кузьмин',	'Анатолий',	'Мужской',	33,	'Футуристический цирк',	5,	0),
 -- (145910,	'Жукова',	'Ангелина',	'Женский',	29,	'Роботический лабиринт',	4,	0),
 -- (145911,	'Васильева',	'Зоя',	'Женский',	25,	'Интерактивный музей робототехники',	5,	0)
-#######################
-Работа с таблицей buyer
+-- #######################
+-- Работа с таблицей buyer
 
-!!!Практика: ограничиваем выгрузку полей
+-- !!!Практика: ограничиваем выгрузку полей
 
-1.
-Выгрузите из таблицы buyer поля last_name и percent_of_discount.
-SELECT last_name, percent_of_discount 
-FROM buyer
-2.
-Выгрузите из таблицы buyer поля bracelet_id, last_name и percent_of_discount. Назначьте полям псевдонимы id, name_client и discount соответственно.
-SELECT bracelet_id as id, last_name as name_client, percent_of_discount as discount 
-FROM buyer
-3.
-Выгрузите из таблицы buyer поля bracelet_id, first_name, gender и percent_of_discount. Назначьте полям псевдонимы id ,first_name_client, gender_client и discount соответственно. 
-Расположите поля в итоговой таблице в следующем порядке: first_name_client, gender_client, discount и id.
-SELECT first_name as first_name_client, gender as gender_client, percent_of_discount as discount, bracelet_id as id 
-FROM buyer
-
-
-!!!Практика: ограничиваем выгрузку строк
-1.
-Выгрузите из таблицы buyer поля gender и age. Установите ограничение в семь первых строк.
-SELECT gender, age
-FROM buyer 
-LIMIT 7
-
-2.
-Выгрузите из таблицы buyer поля last_name, gender, age, connection_area и percent_of_discount. 
-Переименуйте в итоговой таблице поле connection_area в area, а percent_of_discount — в discount. Выгрузите строки с 10 по 16 включительно.
-SELECT last_name, gender, age, connection_area as area, percent_of_discount as discount
-FROM buyer
-LIMIT 7 OFFSET 9
-3.
-Выгрузите из таблицы buyer все поля. Отобразите все записи, начиная со 170 включительно.
-SELECT *
-FROM buyer
-OFFSET 169
-
-!!!Практика: оператор WHERE
-
-1.
-Выгрузите все значения из таблицы buyer, отфильтровав возраст клиента: он должен быть меньше либо равен 30. Возраст хранит поле age.
-SELECT *
-FROM buyer
-WHERE age<=30
-2.
-Из таблицы buyer выгрузите несколько полей: first_name с именем покупателя, connection_area с указанием зоны первого подключения и company_marker, в котором указано значение 1,
-если клиент является сотрудником компании, и 0 — если нет.
-Оставьте записи только о тех покупателях, которые в первый раз подключились в зоне «Роботический лабиринт».
-SELECT first_name,
-       connection_area,
-       company_marker
-FROM buyer
-WHERE connection_area = 'Роботический лабиринт'
-3.
-Из таблицы buyer выгрузите все поля, но только для тех покупателей, скидка которых не равна 3.
-SELECT *
-FROM buyer
-WHERE 	percent_of_discount != 3
-
-!!!Практика: задаём условия выборки
+-- 1.
+-- Выгрузите из таблицы buyer поля last_name и percent_of_discount.
+-- SELECT last_name, percent_of_discount 
+-- FROM buyer
+-- 2.
+-- Выгрузите из таблицы buyer поля bracelet_id, last_name и percent_of_discount. Назначьте полям псевдонимы id, name_client и discount соответственно.
+-- SELECT bracelet_id as id, last_name as name_client, percent_of_discount as discount 
+-- FROM buyer
+-- 3.
+-- Выгрузите из таблицы buyer поля bracelet_id, first_name, gender и percent_of_discount. Назначьте полям псевдонимы id ,first_name_client, gender_client и discount соответственно. 
+-- Расположите поля в итоговой таблице в следующем порядке: first_name_client, gender_client, discount и id.
+-- SELECT first_name as first_name_client, gender as gender_client, percent_of_discount as discount, bracelet_id as id 
+-- FROM buyer
 
 
-1.
-Выгрузите все значения из таблицы buyer, отфильтровав клиентов:
-по возрасту — меньше либо равен 30,
-полу — мужской.
-Возраст хранит поле age, а пол — gender.
+-- !!!Практика: ограничиваем выгрузку строк
+-- 1.
+-- Выгрузите из таблицы buyer поля gender и age. Установите ограничение в семь первых строк.
+-- SELECT gender, age
+-- FROM buyer 
+-- LIMIT 7
 
-SELECT *
-FROM buyer
-WHERE age<=30 AND gender='Мужской'
-2.
-Выгрузите все значения из таблицы buyer, отфильтровав клиентов по следующим условиям: 
-либо в поле first_name указано имя Ольга,
-либо значение поля percent_of_discount равно 20.
-SELECT *
-FROM buyer
-WHERE first_name = 'Ольга' or percent_of_discount = 20
-3.
-Выгрузите поля last_name, percent_of_discount и company_marker из таблицы buyer. Установите следующие условия: 
-либо процент скидки равен 20,
-либо клиент — сотрудник компании.
-Если клиент является сотрудником парка, то company_marker будет равен 1.
-SELECT last_name, percent_of_discount, company_marker
-FROM buyer
-WHERE percent_of_discount = 20 or company_marker = 1
-4.
-Выгрузите поля last_name и age из таблицы buyer. Оставьте в таблице клиентов, которым 25 лет, 32 года или 38 лет. Кроме того, пользователи от 40 до 45 лет тоже должны попасть в выборку.
-SELECT last_name, age
-FROM buyer
-WHERE age in (25, 32, 38, 40, 41, 42, 43, 44, 45)
+-- 2.
+-- Выгрузите из таблицы buyer поля last_name, gender, age, connection_area и percent_of_discount. 
+-- Переименуйте в итоговой таблице поле connection_area в area, а percent_of_discount — в discount. Выгрузите строки с 10 по 16 включительно.
+-- SELECT last_name, gender, age, connection_area as area, percent_of_discount as discount
+-- FROM buyer
+-- LIMIT 7 OFFSET 9
+-- 3.
+-- Выгрузите из таблицы buyer все поля. Отобразите все записи, начиная со 170 включительно.
+-- SELECT *
+-- FROM buyer
+-- OFFSET 169
 
-5.
-Выгрузите поля bracelet_id, last_name и first_name из таблицы buyer. В выборку должны попасть клиенты:
-от 30 до 48 лет включительно,
-которые впервые подключились не в зонах «Роботические гонки» и «Робо-город»,
-у которых нет скидки.
-Возраст указан в поле age, зона первого подключения — в поле connection_area, а скидка — в поле percent_of_discount.
-SELECT bracelet_id, last_name, first_name
-FROM buyer
-WHERE age in (30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48) and connection_area not in ('Роботические гонки', 'Робо-город') and percent_of_discount=0
-6.
-Выгрузите поля connection_area и gender из таблицы buyer. Назовите их area и gender_of_client соответственно. Задайте условия — в выборку должны попасть:
-все Андреи и Николаи
-младше 38 лет,
-фамилии которых — не Иванов и не Кузнецов.
-Кроме того, в выборке необходимо оставить только тех клиентов, которые в первый раз подключились в зоне «Роботический лабиринт».
+-- !!!Практика: оператор WHERE
 
-SELECT connection_area as area, gender as gender_of_client
-FROM buyer
-WHERE first_name in ('Андрей','Николай') and age<38 and last_name not in ('Иванов', 'Кузнецов') and connection_area = 'Роботический лабиринт'
+-- 1.
+-- Выгрузите все значения из таблицы buyer, отфильтровав возраст клиента: он должен быть меньше либо равен 30. Возраст хранит поле age.
+-- SELECT *
+-- FROM buyer
+-- WHERE age<=30
+-- 2.
+-- Из таблицы buyer выгрузите несколько полей: first_name с именем покупателя, connection_area с указанием зоны первого подключения и company_marker, в котором указано значение 1,
+-- если клиент является сотрудником компании, и 0 — если нет.
+-- Оставьте записи только о тех покупателях, которые в первый раз подключились в зоне «Роботический лабиринт».
+-- SELECT first_name,
+--        connection_area,
+--        company_marker
+-- FROM buyer
+-- WHERE connection_area = 'Роботический лабиринт'
+-- 3.
+-- Из таблицы buyer выгрузите все поля, но только для тех покупателей, скидка которых не равна 3.
+-- SELECT *
+-- FROM buyer
+-- WHERE 	percent_of_discount != 3
+
+-- !!!Практика: задаём условия выборки
 
 
-Практика: сортируем данные
-1.
-Отсортируйте таблицу hotdog по полю bracelet_id по возрастанию. Оставьте в таблице только первые пять строк.
-SELECT *
-FROM hotdog
-ORDER BY bracelet_id 
-LIMIT 5
-2.
-Найдите самый дорогой хот-дог. Отобразите название хот-дога и его цену. Используйте поля name_hotdog и price.
-SELECT name_hotdog, AVG(price)
-FROM hotdog 
-GROUP BY name_hotdog
-ORDER BY AVG(price) DESC
-LIMIT 1
-3.
-Отберите три зоны первого подключения (поле connection_area) из таблицы buyer, где средняя скидка (поле percent_of_discount) была выше всего.
-SELECT connection_area, AVG(percent_of_discount)
-FROM buyer
-GROUP BY connection_area
-ORDER BY AVG(percent_of_discount) DESC
-LIMIT 3
+-- 1.
+-- Выгрузите все значения из таблицы buyer, отфильтровав клиентов:
+-- по возрасту — меньше либо равен 30,
+-- полу — мужской.
+-- Возраст хранит поле age, а пол — gender.
+
+-- SELECT *
+-- FROM buyer
+-- WHERE age<=30 AND gender='Мужской'
+-- 2.
+-- Выгрузите все значения из таблицы buyer, отфильтровав клиентов по следующим условиям: 
+-- либо в поле first_name указано имя Ольга,
+-- либо значение поля percent_of_discount равно 20.
+-- SELECT *
+-- FROM buyer
+-- WHERE first_name = 'Ольга' or percent_of_discount = 20
+-- 3.
+-- Выгрузите поля last_name, percent_of_discount и company_marker из таблицы buyer. Установите следующие условия: 
+-- либо процент скидки равен 20,
+-- либо клиент — сотрудник компании.
+-- Если клиент является сотрудником парка, то company_marker будет равен 1.
+-- SELECT last_name, percent_of_discount, company_marker
+-- FROM buyer
+-- WHERE percent_of_discount = 20 or company_marker = 1
+-- 4.
+-- Выгрузите поля last_name и age из таблицы buyer. Оставьте в таблице клиентов, которым 25 лет, 32 года или 38 лет. Кроме того, пользователи от 40 до 45 лет тоже должны попасть в выборку.
+-- SELECT last_name, age
+-- FROM buyer
+-- WHERE age in (25, 32, 38, 40, 41, 42, 43, 44, 45)
+
+-- 5.
+-- Выгрузите поля bracelet_id, last_name и first_name из таблицы buyer. В выборку должны попасть клиенты:
+-- от 30 до 48 лет включительно,
+-- которые впервые подключились не в зонах «Роботические гонки» и «Робо-город»,
+-- у которых нет скидки.
+-- Возраст указан в поле age, зона первого подключения — в поле connection_area, а скидка — в поле percent_of_discount.
+-- SELECT bracelet_id, last_name, first_name
+-- FROM buyer
+-- WHERE age in (30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48) and connection_area not in ('Роботические гонки', 'Робо-город') and percent_of_discount=0
+-- 6.
+-- Выгрузите поля connection_area и gender из таблицы buyer. Назовите их area и gender_of_client соответственно. Задайте условия — в выборку должны попасть:
+-- все Андреи и Николаи
+-- младше 38 лет,
+-- фамилии которых — не Иванов и не Кузнецов.
+-- Кроме того, в выборке необходимо оставить только тех клиентов, которые в первый раз подключились в зоне «Роботический лабиринт».
+
+-- SELECT connection_area as area, gender as gender_of_client
+-- FROM buyer
+-- WHERE first_name in ('Андрей','Николай') and age<38 and last_name not in ('Иванов', 'Кузнецов') and connection_area = 'Роботический лабиринт'
+
+
+-- Практика: сортируем данные
+-- 1.
+-- Отсортируйте таблицу hotdog по полю bracelet_id по возрастанию. Оставьте в таблице только первые пять строк.
+-- SELECT *
+-- FROM hotdog
+-- ORDER BY bracelet_id 
+-- LIMIT 5
+-- 2.
+-- Найдите самый дорогой хот-дог. Отобразите название хот-дога и его цену. Используйте поля name_hotdog и price.
+-- SELECT name_hotdog, AVG(price)
+-- FROM hotdog 
+-- GROUP BY name_hotdog
+-- ORDER BY AVG(price) DESC
+-- LIMIT 1
+-- 3.
+-- Отберите три зоны первого подключения (поле connection_area) из таблицы buyer, где средняя скидка (поле percent_of_discount) была выше всего.
+-- SELECT connection_area, AVG(percent_of_discount)
+-- FROM buyer
+-- GROUP BY connection_area
+-- ORDER BY AVG(percent_of_discount) DESC
+-- LIMIT 3
 
 
 
@@ -805,129 +805,129 @@ LIMIT 3
 
 
   
-#############################
-Работа с таблицей hotdog
+-- #############################
+-- Работа с таблицей hotdog
   
-  !!!Агрегируем данные
-1. Найдите минимальное и максимальное значение в поле ingredients таблицы hotdog.
-SELECT max(ingredients), min(ingredients)
-FROM hotdog;
-2.
-Найдите среднюю цену хот-дога (поле price) в таблице hotdog для тех заказов, где была выбрана вегетарианская сосиска (поле vegan_sausage). 
-Если значение поля vegan_sausage равно 1, значит, сосиска была вегетарианская. Если 0 — мясная.
-SELECT AVG(price)
-FROM hotdog
-WHERE vegan_sausage=1
-3.
-Посчитайте, сколько раз заказывали хот-дог «Карибский Потоп» в феврале. Вам понадобятся поле date и поле с названием хот-дога (name_hotdog).
-SELECT COUNT(name_hotdog)
-FROM hotdog
-WHERE DATE_TRUNC('month', date) = '2022-02-01' and name_hotdog='Карибский Потоп'
-4.
-Посчитайте, сколько в среднем клиент с браслетом (поле bracelet_id) 145863 потратил на хот-доги с добавлением кетчупа и майонеза одновременно или на хот-доги с мясной сосиской. 
-Если кетчуп и майонез добавлены, поля mayonnaise и ketchup содержат значение 1.
-SELECT AVG(price*quantity)
-FROM hotdog
-WHERE bracelet_id=145863 and ((mayonnaise=1 and ketchup=1) or vegan_sausage=0)
-5.
-Давайте рассчитаем настоящую бизнес-метрику — conversion rate, или CR. Это доля уникальных пользователей от пользователей в целом из таблицы hotdog.
-Разделите число уникальных пользователей на число всех пользователей. Используйте поле bracelet_id.
-SELECT COUNT(DISTINCT(bracelet_id))::numeric/(COUNT(bracelet_id))
-FROM hotdog
+--   !!!Агрегируем данные
+-- 1. Найдите минимальное и максимальное значение в поле ingredients таблицы hotdog.
+-- SELECT max(ingredients), min(ingredients)
+-- FROM hotdog;
+-- 2.
+-- Найдите среднюю цену хот-дога (поле price) в таблице hotdog для тех заказов, где была выбрана вегетарианская сосиска (поле vegan_sausage). 
+-- Если значение поля vegan_sausage равно 1, значит, сосиска была вегетарианская. Если 0 — мясная.
+-- SELECT AVG(price)
+-- FROM hotdog
+-- WHERE vegan_sausage=1
+-- 3.
+-- Посчитайте, сколько раз заказывали хот-дог «Карибский Потоп» в феврале. Вам понадобятся поле date и поле с названием хот-дога (name_hotdog).
+-- SELECT COUNT(name_hotdog)
+-- FROM hotdog
+-- WHERE DATE_TRUNC('month', date) = '2022-02-01' and name_hotdog='Карибский Потоп'
+-- 4.
+-- Посчитайте, сколько в среднем клиент с браслетом (поле bracelet_id) 145863 потратил на хот-доги с добавлением кетчупа и майонеза одновременно или на хот-доги с мясной сосиской. 
+-- Если кетчуп и майонез добавлены, поля mayonnaise и ketchup содержат значение 1.
+-- SELECT AVG(price*quantity)
+-- FROM hotdog
+-- WHERE bracelet_id=145863 and ((mayonnaise=1 and ketchup=1) or vegan_sausage=0)
+-- 5.
+-- Давайте рассчитаем настоящую бизнес-метрику — conversion rate, или CR. Это доля уникальных пользователей от пользователей в целом из таблицы hotdog.
+-- Разделите число уникальных пользователей на число всех пользователей. Используйте поле bracelet_id.
+-- SELECT COUNT(DISTINCT(bracelet_id))::numeric/(COUNT(bracelet_id))
+-- FROM hotdog
   
-  !!!Создание расчетного поля
-1.
-В поле bracelet_id хранится шестизначное число, отвечающее за код браслета. Все эти числа начинаются с 145. Чтобы было удобнее работать с полем, эти цифры можно убрать. 
-Отобразите первые пять записей с полем bracelet_id и с новым полем, где будут только три последние цифры.
-SELECT bracelet_id, bracelet_id-145000 AS bracelet_idd
-FROM buyer
-LIMIT 5;
-2.
-В таблице с заказами хот-догов (hotdog) хранятся поля с ценой за один хот-дог (price) и количеством заказанных товаров (quantity). 
-Выведите первые десять строк полей order_id, price, quantity и расчётное поле, в котором отобразится стоимость заказа.
-SELECT order_id, price, quantity, price*quantity AS chek
-FROM hotdog
-LIMIT 10;
+--   !!!Создание расчетного поля
+-- 1.
+-- В поле bracelet_id хранится шестизначное число, отвечающее за код браслета. Все эти числа начинаются с 145. Чтобы было удобнее работать с полем, эти цифры можно убрать. 
+-- Отобразите первые пять записей с полем bracelet_id и с новым полем, где будут только три последние цифры.
+-- SELECT bracelet_id, bracelet_id-145000 AS bracelet_idd
+-- FROM buyer
+-- LIMIT 5;
+-- 2.
+-- В таблице с заказами хот-догов (hotdog) хранятся поля с ценой за один хот-дог (price) и количеством заказанных товаров (quantity). 
+-- Выведите первые десять строк полей order_id, price, quantity и расчётное поле, в котором отобразится стоимость заказа.
+-- SELECT order_id, price, quantity, price*quantity AS chek
+-- FROM hotdog
+-- LIMIT 10;
 
 
-!!!Практика: группируем данные по категориям
-1.
-Посчитайте, сколько хот-догов заказывали с кетчупом и без него. Сгруппируйте данные по полю ketchup таблицы hotdog и суммируйте значения в поле quantity.
-SELECT sum(quantity), ketchup
-FROM hotdog
-GROUP BY ketchup
-2.Проверим, как отличаются данные по хот-догам. Посчитайте количество заказов и среднее число ингредиентов для каждого вида хот-дога. Нужные поля — name_hotdog и ingredients.  
-SELECT name_hotdog, COUNT(quantity), AVG(ingredients)
-FROM hotdog
-GROUP BY name_hotdog
-3.
-Отобразите, сколько раз в среднем поливали горчицей каждый вид хот-дога, в котором пять ингредиентов. Добавьте условие: отберите записи за вторую неделю года.
-Если в хот-дог добавили горчицу, поле mustard содержит значение 1.
-SELECT name_hotdog, 
-AVG(mustard) 
-FROM hotdog 
-WHERE ingredients = 5 AND EXTRACT (WEEK FROM date) = 2 
-GROUP BY name_hotdog
-4.
-Отобразите, сколько заказов с вегетарианской сосиской продавалось в первые пять дней января. Отобразите в итоговой таблице номер дня января и число заказов.
-Если сосиска вегетарианская, поле vegan_sausage принимает значение 1.
-SELECT EXTRACT(DAY FROM DATE), COUNT(*)
-FROM hotdog 
-WHERE date >= '2022-01-01' AND date <= '2022-01-05' 
-AND vegan_sausage = 1 
-GROUP BY date;
-5.
-Сколько выручки принесли клиенты с браслетами 145900, 145783 и 145866, покупая сосиски с добавлением всех трёх соусов: горчицы, кетчупа и майонеза?
-SELECT bracelet_id, (sum(price*quantity))
-FROM hotdog
-WHERE  (mustard=1 AND mayonnaise=1 AND ketchup=1) AND bracelet_id in('145900', '145783', '145866') 
-GROUP BY bracelet_id
+-- !!!Практика: группируем данные по категориям
+-- 1.
+-- Посчитайте, сколько хот-догов заказывали с кетчупом и без него. Сгруппируйте данные по полю ketchup таблицы hotdog и суммируйте значения в поле quantity.
+-- SELECT sum(quantity), ketchup
+-- FROM hotdog
+-- GROUP BY ketchup
+-- 2.Проверим, как отличаются данные по хот-догам. Посчитайте количество заказов и среднее число ингредиентов для каждого вида хот-дога. Нужные поля — name_hotdog и ingredients.  
+-- SELECT name_hotdog, COUNT(quantity), AVG(ingredients)
+-- FROM hotdog
+-- GROUP BY name_hotdog
+-- 3.
+-- Отобразите, сколько раз в среднем поливали горчицей каждый вид хот-дога, в котором пять ингредиентов. Добавьте условие: отберите записи за вторую неделю года.
+-- Если в хот-дог добавили горчицу, поле mustard содержит значение 1.
+-- SELECT name_hotdog, 
+-- AVG(mustard) 
+-- FROM hotdog 
+-- WHERE ingredients = 5 AND EXTRACT (WEEK FROM date) = 2 
+-- GROUP BY name_hotdog
+-- 4.
+-- Отобразите, сколько заказов с вегетарианской сосиской продавалось в первые пять дней января. Отобразите в итоговой таблице номер дня января и число заказов.
+-- Если сосиска вегетарианская, поле vegan_sausage принимает значение 1.
+-- SELECT EXTRACT(DAY FROM DATE), COUNT(*)
+-- FROM hotdog 
+-- WHERE date >= '2022-01-01' AND date <= '2022-01-05' 
+-- AND vegan_sausage = 1 
+-- GROUP BY date;
+-- 5.
+-- Сколько выручки принесли клиенты с браслетами 145900, 145783 и 145866, покупая сосиски с добавлением всех трёх соусов: горчицы, кетчупа и майонеза?
+-- SELECT bracelet_id, (sum(price*quantity))
+-- FROM hotdog
+-- WHERE  (mustard=1 AND mayonnaise=1 AND ketchup=1) AND bracelet_id in('145900', '145783', '145866') 
+-- GROUP BY bracelet_id
 
-!!!Практика: фильтруем данные после группировки
-1.
-Сравните продажи вегетарианских хот-догов с разным количеством ингредиентов. Посчитайте, сколько раз заказывали хот-доги с вегетарианской сосиской, и сгруппируйте данные по количеству ингредиентов. 
-В итоговой таблице оставьте только те записи, где заказов меньше или равно 76.
-Вам понадобятся поля vegan_sausage и ingredients. Оператор «меньше или равно» — <=.
-SELECT count(quantity), ingredients
-FROM hotdog
-WHERE vegan_sausage=1
-GROUP BY ingredients
-HAVING count(quantity)<=76
-2.
-Дополните предыдущий запрос. Оставьте только те заказы, где сумма горчиц — больше 30. Вам понадобится поле mustard: если горчицу добавили, это поле хранит значение 1.
-SELECT ingredients,
-       COUNT(ingredients)
-FROM hotdog
-WHERE vegan_sausage = 1
-GROUP BY ingredients 
-HAVING COUNT(ingredients) <=76 and sum(mustard)>=30
+-- !!!Практика: фильтруем данные после группировки
+-- 1.
+-- Сравните продажи вегетарианских хот-догов с разным количеством ингредиентов. Посчитайте, сколько раз заказывали хот-доги с вегетарианской сосиской, и сгруппируйте данные по количеству ингредиентов. 
+-- В итоговой таблице оставьте только те записи, где заказов меньше или равно 76.
+-- Вам понадобятся поля vegan_sausage и ingredients. Оператор «меньше или равно» — <=.
+-- SELECT count(quantity), ingredients
+-- FROM hotdog
+-- WHERE vegan_sausage=1
+-- GROUP BY ingredients
+-- HAVING count(quantity)<=76
+-- 2.
+-- Дополните предыдущий запрос. Оставьте только те заказы, где сумма горчиц — больше 30. Вам понадобится поле mustard: если горчицу добавили, это поле хранит значение 1.
+-- SELECT ingredients,
+--        COUNT(ingredients)
+-- FROM hotdog
+-- WHERE vegan_sausage = 1
+-- GROUP BY ingredients 
+-- HAVING COUNT(ingredients) <=76 and sum(mustard)>=30
 
-3.
-Отобразите на экране список названий хот-догов, в которые хотя бы один раз добавляли майонез, горчицу или кетчуп. 
-В списке должны быть только те хот-доги, средняя выручка от продажи которых больше или равна 30.5.
-Нужные поля — name_hotdog, mustard, ketchup и mayonnaise. Если соус добавлен, значение поля равно 1.
-Оператор «больше или равно» – >=.
-SELECT name_hotdog
-FROM hotdog
-WHERE mustard=1 or mayonnaise=1 or ketchup=1
-GROUP BY name_hotdog
-HAVING AVG(price*quantity)>=30.5
+-- 3.
+-- Отобразите на экране список названий хот-догов, в которые хотя бы один раз добавляли майонез, горчицу или кетчуп. 
+-- В списке должны быть только те хот-доги, средняя выручка от продажи которых больше или равна 30.5.
+-- Нужные поля — name_hotdog, mustard, ketchup и mayonnaise. Если соус добавлен, значение поля равно 1.
+-- Оператор «больше или равно» – >=.
+-- SELECT name_hotdog
+-- FROM hotdog
+-- WHERE mustard=1 or mayonnaise=1 or ketchup=1
+-- GROUP BY name_hotdog
+-- HAVING AVG(price*quantity)>=30.5
 
   
-Практика: группируем и сортируем данные по нескольким полям
-1.
-Посчитайте сумму выручки, полученную от продаж каждого хот-дога, за каждый месяц. Отобразите в итоговой таблице номер месяца, название хот-дога и сумму выручки.
-SELECT EXTRACT(month from date), name_hotdog, sum(price*quantity) AS kek
-FROM hotdog
-GROUP BY EXTRACT(MONTH FROM date), name_hotdog
-ORDER BY  EXTRACT(MONTH FROM date) ASC, kek DESC
+-- Практика: группируем и сортируем данные по нескольким полям
+-- 1.
+-- Посчитайте сумму выручки, полученную от продаж каждого хот-дога, за каждый месяц. Отобразите в итоговой таблице номер месяца, название хот-дога и сумму выручки.
+-- SELECT EXTRACT(month from date), name_hotdog, sum(price*quantity) AS kek
+-- FROM hotdog
+-- GROUP BY EXTRACT(MONTH FROM date), name_hotdog
+-- ORDER BY  EXTRACT(MONTH FROM date) ASC, kek DESC
 
-2.
-Дополните предыдущий запрос. Отсортируйте таблицу по названию хот-дога в обратном алфавитном порядке, а затем — по месяцу в порядке возрастания.
-SELECT EXTRACT(month from date), name_hotdog, sum(price*quantity) AS kek
-FROM hotdog
-GROUP BY EXTRACT(MONTH FROM date), name_hotdog
-ORDER BY  name_hotdog, EXTRACT(MONTH FROM date) ASC
+-- 2.
+-- Дополните предыдущий запрос. Отсортируйте таблицу по названию хот-дога в обратном алфавитном порядке, а затем — по месяцу в порядке возрастания.
+-- SELECT EXTRACT(month from date), name_hotdog, sum(price*quantity) AS kek
+-- FROM hotdog
+-- GROUP BY EXTRACT(MONTH FROM date), name_hotdog
+-- ORDER BY  name_hotdog, EXTRACT(MONTH FROM date) ASC
   
 
 
@@ -940,90 +940,90 @@ ORDER BY  name_hotdog, EXTRACT(MONTH FROM date) ASC
 
 
 
-#####################################
-Работа с таблицей pizza
-!!!Проверочные задания
-1.
-Подсчитайте максимальный и минимальный радиус пицц, которые покупали 13 марта 2022 года.
-SELECT  MAX(radius),  MIN(radius)  
-FROM pizza  
-WHERE DATE_TRUNC('day', date)='2022-03-13' 
-2.
-Подсчитайте максимальный и минимальный радиус пиццы для каждого дня марта. Отобразите в таблице дату, максимальное и минимальное значения. Отсортируйте числа по убыванию.
-SELECT date, MAX(radius), MIN(radius)
-FROM pizza
-WHERE date between '2022-03-01' and '2022-03-31'
-GROUP BY date
-ORDER BY date desc
-3.
-Посчитайте среднюю стоимость пиццы в зависимости от того, вегетарианская она или нет. Отобразите на экране поле vegan_marker и поле со средней ценой.
-SELECT vegan_marker, AVG(price)
-FROM pizza
-GROUP BY vegan_marker
-4.
-Дополните предыдущий запрос. Добавьте группировку по месяцу. Отобразите в итоговой таблице:
-месяц в виде первого числа месяца,
-указатель, вегетарианская пицца или нет,
-среднюю стоимость пиццы.
-Отсортируйте данные по возрастанию: по месяцу и по указателю, вегетарианская ли пицца.
-SELECT vegan_marker, AVG(price), DATE_TRUNC('month', date)
-FROM pizza
-GROUP BY vegan_marker, DATE_TRUNC('month', date)
-ORDER BY DATE_TRUNC('month', date), vegan_marker
+-- #####################################
+-- Работа с таблицей pizza
+-- !!!Проверочные задания
+-- 1.
+-- Подсчитайте максимальный и минимальный радиус пицц, которые покупали 13 марта 2022 года.
+-- SELECT  MAX(radius),  MIN(radius)  
+-- FROM pizza  
+-- WHERE DATE_TRUNC('day', date)='2022-03-13' 
+-- 2.
+-- Подсчитайте максимальный и минимальный радиус пиццы для каждого дня марта. Отобразите в таблице дату, максимальное и минимальное значения. Отсортируйте числа по убыванию.
+-- SELECT date, MAX(radius), MIN(radius)
+-- FROM pizza
+-- WHERE date between '2022-03-01' and '2022-03-31'
+-- GROUP BY date
+-- ORDER BY date desc
+-- 3.
+-- Посчитайте среднюю стоимость пиццы в зависимости от того, вегетарианская она или нет. Отобразите на экране поле vegan_marker и поле со средней ценой.
+-- SELECT vegan_marker, AVG(price)
+-- FROM pizza
+-- GROUP BY vegan_marker
+-- 4.
+-- Дополните предыдущий запрос. Добавьте группировку по месяцу. Отобразите в итоговой таблице:
+-- месяц в виде первого числа месяца,
+-- указатель, вегетарианская пицца или нет,
+-- среднюю стоимость пиццы.
+-- Отсортируйте данные по возрастанию: по месяцу и по указателю, вегетарианская ли пицца.
+-- SELECT vegan_marker, AVG(price), DATE_TRUNC('month', date)
+-- FROM pizza
+-- GROUP BY vegan_marker, DATE_TRUNC('month', date)
+-- ORDER BY DATE_TRUNC('month', date), vegan_marker
 
 
 
 
 
-!!!!
-1.
-Выгрузите всю информацию из таблицы pizza.
-SELECT *
-FROM pizza
-2.
-Один из способов проверки таблицы на аномалии — выгрузить данные из середины таблицы. Выгрузите оттуда пять строк, с 1067 по 1071.
-SELECT *
-FROM pizza
-LIMIT 5 OFFSET 1066
-3.
-Отдел маркетинга тоже хочет посмотреть на таблицу. Выгрузите первые десять строк. Ограничьтесь полями date, name, bracelet_id, price и quantity. 
-В итоговой таблице переименуйте date, name и bracelet_id в order_date, pizza_name и client_id соответственно, чтобы коллегам было проще работать с данными.
-SELECT date as order_date, name as pizza_name, bracelet_id as client_id, price, quantity
-FROM pizza
-LIMIT 10
-4.
-Нужно посмотреть на самые дорогие пиццы. Отберите все заказы, где стоимость пиццы больше 40 баллов.
-SELECT *
-FROM pizza
-WHERE price>40
-5.
-У отдела продаж есть гипотеза, что пиццы дороже 40 баллов заказывали наиболее активно с 1 по 15 февраля 2022 года.
-Дополните предыдущий запрос и добавьте условие, которое выгрузит заказы с 1 по 15 февраля. Ограничьтесь полями date, name, price.
-SELECT date, name, price
-FROM pizza
-WHERE price>40 and date BETWEEN '2022-02-01' AND '2022-02-15'
-6.
-Отобразите поля с названием пиццы, датой, номером недели и радиусом пиццы для заказов двух категорий. 
-В первой категории цена пиццы меньше 30 баллов, а радиус больше 37 см. Во второй — радиус пиццы больше или равен 35 см, а цена больше 35 баллов.
-Оператор «больше или равно» — >=.
-SELECT name, date, EXTRACT(week from date), radius
-FROM pizza
-WHERE (price<30 and radius>37) or (price>35 and radius>=35)
-7.
-А что там с количеством пицц в заказе? Отобразите дату, первый день месяца, название пиццы и количество пицц в заказе. 
-Отберите заказы только за февраль и с количеством пицц в заказе, не равным одному.
-Оператор «не равно» — !=.
-SELECT date, DATE_TRUNC('month', date), name, quantity
-FROM pizza
-WHERE quantity!=1 and DATE_TRUNC('month', date) = '2022-02-01'
-8.
-Некоторые клиенты являются работниками компании. Идентификаторы их браслетов — 145738, 145759, 145773, 145807, 145815, 145821, 145873, 145880. 
-Отобразите названия, цену и количество пицц в заказах, которые делали эти работники в марте.
-SELECT name, price, quantity
-FROM pizza
-WHERE bracelet_id in (145738, 145759, 145773, 145807, 145815, 145821, 145873, 145880) and DATE BETWEEN '2022-03-01' AND '2022-03-31'
-9.
-А теперь определите, кто из этих работников за всё время покупал вегетарианские пиццы. Отобразите идентификатор браслета и название пиццы.
-SELECT bracelet_id, name
-FROM pizza
-WHERE vegan_marker = 1  and bracelet_id in (145738, 145759, 145773, 145807, 145815, 145821, 145873, 145880)
+-- !!!!
+-- 1.
+-- Выгрузите всю информацию из таблицы pizza.
+-- SELECT *
+-- FROM pizza
+-- 2.
+-- Один из способов проверки таблицы на аномалии — выгрузить данные из середины таблицы. Выгрузите оттуда пять строк, с 1067 по 1071.
+-- SELECT *
+-- FROM pizza
+-- LIMIT 5 OFFSET 1066
+-- 3.
+-- Отдел маркетинга тоже хочет посмотреть на таблицу. Выгрузите первые десять строк. Ограничьтесь полями date, name, bracelet_id, price и quantity. 
+-- В итоговой таблице переименуйте date, name и bracelet_id в order_date, pizza_name и client_id соответственно, чтобы коллегам было проще работать с данными.
+-- SELECT date as order_date, name as pizza_name, bracelet_id as client_id, price, quantity
+-- FROM pizza
+-- LIMIT 10
+-- 4.
+-- Нужно посмотреть на самые дорогие пиццы. Отберите все заказы, где стоимость пиццы больше 40 баллов.
+-- SELECT *
+-- FROM pizza
+-- WHERE price>40
+-- 5.
+-- У отдела продаж есть гипотеза, что пиццы дороже 40 баллов заказывали наиболее активно с 1 по 15 февраля 2022 года.
+-- Дополните предыдущий запрос и добавьте условие, которое выгрузит заказы с 1 по 15 февраля. Ограничьтесь полями date, name, price.
+-- SELECT date, name, price
+-- FROM pizza
+-- WHERE price>40 and date BETWEEN '2022-02-01' AND '2022-02-15'
+-- 6.
+-- Отобразите поля с названием пиццы, датой, номером недели и радиусом пиццы для заказов двух категорий. 
+-- В первой категории цена пиццы меньше 30 баллов, а радиус больше 37 см. Во второй — радиус пиццы больше или равен 35 см, а цена больше 35 баллов.
+-- Оператор «больше или равно» — >=.
+-- SELECT name, date, EXTRACT(week from date), radius
+-- FROM pizza
+-- WHERE (price<30 and radius>37) or (price>35 and radius>=35)
+-- 7.
+-- А что там с количеством пицц в заказе? Отобразите дату, первый день месяца, название пиццы и количество пицц в заказе. 
+-- Отберите заказы только за февраль и с количеством пицц в заказе, не равным одному.
+-- Оператор «не равно» — !=.
+-- SELECT date, DATE_TRUNC('month', date), name, quantity
+-- FROM pizza
+-- WHERE quantity!=1 and DATE_TRUNC('month', date) = '2022-02-01'
+-- 8.
+-- Некоторые клиенты являются работниками компании. Идентификаторы их браслетов — 145738, 145759, 145773, 145807, 145815, 145821, 145873, 145880. 
+-- Отобразите названия, цену и количество пицц в заказах, которые делали эти работники в марте.
+-- SELECT name, price, quantity
+-- FROM pizza
+-- WHERE bracelet_id in (145738, 145759, 145773, 145807, 145815, 145821, 145873, 145880) and DATE BETWEEN '2022-03-01' AND '2022-03-31'
+-- 9.
+-- А теперь определите, кто из этих работников за всё время покупал вегетарианские пиццы. Отобразите идентификатор браслета и название пиццы.
+-- SELECT bracelet_id, name
+-- FROM pizza
+-- WHERE vegan_marker = 1  and bracelet_id in (145738, 145759, 145773, 145807, 145815, 145821, 145873, 145880)
